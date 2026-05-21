@@ -17,6 +17,7 @@ This project demonstrates the complete RAG pipeline including document ingestion
 - Source citation with page numbers
 - Streamlit web interface
 - Fully local pipeline without paid APIs
+- Similarity threshold to prevent irrelevant or hallucinated answers
 
 ---
 
@@ -293,7 +294,7 @@ Expected:
 - Retrieval quality depends on chunking strategy
 - Large PDFs may increase embedding time
 - Context window is limited
-- Some irrelevant chunks may occasionally appear
+- The system uses a similarity threshold to reduce hallucinated answers, but retrieval quality may still depend on document relevance and embedding accuracy
 
 ---
 
