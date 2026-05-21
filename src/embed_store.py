@@ -1,8 +1,8 @@
 from langchain_community.vectorstores import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 
-from chunking import chunk_documents
-from ingest import load_documents
+from src.chunking import chunk_documents
+from src.ingest import load_documents
 
 CHROMA_PATH = "chroma_db"
 

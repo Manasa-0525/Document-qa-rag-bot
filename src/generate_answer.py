@@ -1,4 +1,4 @@
-from retrieve import retrieve_documents
+from src.retrieve import retrieve_documents
 
 
 def generate_answer(query):
@@ -30,19 +30,14 @@ def generate_answer(query):
 
     # Generate final formatted answer
     answer = f"""
-==================================================
-QUESTION:
-{query}
-==================================================
+    Question:
+    {query}
 
-ANSWER:
-Based on the retrieved documents, here is the relevant information:
+    Answer:
+    {context[:1200]}
 
-{context[:1200]}
-
-==================================================
-SOURCES:
-"""
+    Sources:
+    """
 
     for src in sources:
         answer += f"\n- {src}"
