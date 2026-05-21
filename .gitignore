@@ -215,6 +215,7 @@ marimo/_lsp/
 __marimo__/
 
 # Streamlit
+hf_cache/
 .streamlit/secrets.toml
 .env
 chroma_db/
