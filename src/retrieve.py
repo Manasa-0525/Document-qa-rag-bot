@@ -6,26 +6,31 @@ CHROMA_PATH = "chroma_db"
 
 def retrieve_documents(query, k=3):
 
-    # Real embedding model
     embedding_model = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
 
-    # Load vector database
     db = Chroma(
         persist_directory=CHROMA_PATH,
         embedding_function=embedding_model
     )
 
-    # Similarity search
-    results = db.similarity_search(query, k=k)
+    results = db.similarity_search_with_score(query, k=k)
 
-    return results
+    filtered_results = []
+
+    for doc, score in results:
+
+        # lower score = better match
+        if score < 1.2:
+            filtered_results.append(doc)
+
+    return filtered_results
 
 
 if __name__ == "__main__":
 
-    query = input("Enter your question: ")
+    query = "What is Artificial Intelligence?"
 
     results = retrieve_documents(query)
 
@@ -33,10 +38,8 @@ if __name__ == "__main__":
 
     for i, doc in enumerate(results, 1):
 
-        print(f"\n========== Result {i} ==========\n")
+        print(f"\nResult {i}:\n")
 
-        print(doc.page_content[:700])
+        print(doc.page_content[:500])
 
-        print("\nSource:")
-        print(f"File: {doc.metadata.get('source')}")
-        print(f"Page: {doc.metadata.get('page')}")
+        print("\nSource:", doc.metadata)
